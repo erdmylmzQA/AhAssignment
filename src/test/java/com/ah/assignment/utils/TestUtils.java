@@ -45,4 +45,24 @@ public class TestUtils {
     public static int extractInt(Response response, String path) {
         return response.jsonPath().getInt(path);
     }
+
+    public static String extractObjectNumber(Response response, String path) {
+        return response.jsonPath().getString(path);
+    }
+
+    public static String getRandomNonAnonymousMaker(List<String> makers) {
+        int randomIndex = getRandomIndex(makers);
+        while (makers.get(randomIndex).equals("anonymous")) {
+            randomIndex = getRandomIndex(makers);
+        }
+        return makers.get(randomIndex);
+    }
+
+    public static String getRandomWordFromTitle(List<String> titleList) {
+        String keyword = titleList.get(getRandomIndex(titleList)).split(" ")[0];
+        while (keyword.equals("The")){
+            keyword = titleList.get(getRandomIndex(titleList)).split(" ")[0];
+        }
+        return keyword;
+    }
 }

@@ -38,8 +38,12 @@ public class RijksMuseumStepDefinitions extends TestContext {
     @When("user sends a get request with a page size")
     public void user_sends_a_get_request() {
         pageSize = TestUtils.getRandomPageSize();
-
         RequestHelper.getCollection(api_key, 1, pageSize);
+        objectNumber = TestUtils.extractObjectNumber(response, "artObjects[0].objectNumber");
+        List<String> involvedMakerList = TestUtils.extractList(response, "artObjects.principalOrFirstMaker");
+        involvedMaker = TestUtils.getRandomNonAnonymousMaker(involvedMakerList);
+        List<String> titleList = TestUtils.extractList(response, "artObjects.title");
+        searchKeyword = TestUtils.getRandomWordFromTitle(titleList);
 
     }
 
