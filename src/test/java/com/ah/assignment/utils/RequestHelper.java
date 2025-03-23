@@ -18,4 +18,15 @@ public class RequestHelper extends TestContext {
                 .get(COLLECTION_ENDPOINT);
     }
 
+    public static void getCollectionWithParameters(String apiKey, int page, int pageSize, String parameters) {
+        response = given()
+                .queryParam("key", apiKey)
+                .queryParam("p", page)
+                .queryParam("ps", pageSize)
+                .queryParam("s", parameters)
+                .when()
+                .get(COLLECTION_ENDPOINT);
+
+    }
+
 }
