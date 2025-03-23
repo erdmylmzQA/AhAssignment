@@ -37,4 +37,8 @@ public class TestUtils {
         }
         return name;
     }
+
+    public static String extractString(Response response, String path) {
+        return response.jsonPath().getString(path);
+    }
 }
