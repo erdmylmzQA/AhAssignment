@@ -40,4 +40,16 @@ public class RijksMuseumStepDefinitions extends TestContext {
         response.then().statusCode(200);
         assertEquals(pageSize, response.jsonPath().getList("artObjects").size());
     }
+
+    @When("user makes a request with an invalid page number {int}")
+    public void userMakesARequestWithAnInvalidPageNumber(int invalidPageNumber) {
+        pageSize = pageSize == 0 ? 10 : pageSize;
+        RequestHelper.getCollection(api_key, invalidPageNumber, pageSize);
+    }
+
+    @When("user makes a request for collections by {int} and {int}")
+    public void userMakesARequestForCollectionsByPNumberAndPsNumber(int pNumber, int psNumber) {
+        pageSize = 100;
+        RequestHelper.getCollection(api_key, pNumber, psNumber);
+    }
 }
