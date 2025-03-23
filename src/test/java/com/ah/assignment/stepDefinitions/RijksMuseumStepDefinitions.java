@@ -94,4 +94,32 @@ public class RijksMuseumStepDefinitions extends TestContext {
         HashSet<String> uniqueFirstObjects = new HashSet<>(firstObjects);
         assertEquals(uniqueFirstObjects.size(), firstObjects.size());
     }
+
+    @When("user makes a search with a keyword")
+    public void userMakesASearchWithAKeyword() {
+        searchKeyword = TestUtils.getValidOrDefault(searchKeyword, "Shiva");
+        RequestHelper.getCollectionWithKeyword(api_key, searchKeyword, 1, 10);
+    }
+
+    @Then("the response should contain search results related to the keyword")
+    public void theResponseShouldContainSearchResultsRelatedToTheKeyword() {
+        List<String> titles = TestUtils.extractList(response, "artObjects.title");
+        List<String> longTitles = TestUtils.extractList(response, "artObjects.longTitle");
+
+        assertTrue(longTitles.stream().anyMatch(t -> t.toLowerCase().contains(searchKeyword.toLowerCase())));
+        assertTrue(titles.stream().anyMatch(t -> t.toLowerCase().contains(searchKeyword.toLowerCase())));
+    }
+
+    @When("user makes a request to the collection endpoint with filter by the involvedMaker")
+    public void userMakesARequestToTheCollectionEndpointWithFilterByTheInvolvedMaker() {
+        involvedMaker = TestUtils.getValidOrDefault(involvedMaker, "Rembrandt van Rijn");
+        RequestHelper.getCollectionInvolvedMaker(api_key, involvedMaker, 1, 10);
+    }
+
+    @Then("the response should contain collections regarding the involvedMaker")
+    public void theResponseShouldContainCollectionsRegardingTheInvolvedMaker() {
+        List<String> principalOrFirstMakers = TestUtils.extractList(response,"artObjects.principalOrFirstMaker");
+        assertNotNull("The list of principal makers should not be null", principalOrFirstMakers);
+        assertTrue("Filter result does not contain the involvedMaker", principalOrFirstMakers.contains(involvedMaker));
+    }
 }

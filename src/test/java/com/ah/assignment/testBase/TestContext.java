@@ -9,6 +9,8 @@ public class TestContext {
     protected static Response response;
     protected static int pageSize;
     protected static Response secondPageResponse;
+    protected static String searchKeyword;
+    protected static String involvedMaker;
 
     protected static void baseUrlEn() {
         RestAssured.baseURI = ConfigurationReader.get("baseUrlEn");
