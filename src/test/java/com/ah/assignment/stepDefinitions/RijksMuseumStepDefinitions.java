@@ -10,6 +10,7 @@ import java.util.HashSet;
 import java.util.List;
 
 import static io.restassured.RestAssured.given;
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static org.junit.Assert.*;
 
 public class RijksMuseumStepDefinitions extends TestContext {
@@ -121,5 +122,18 @@ public class RijksMuseumStepDefinitions extends TestContext {
         List<String> principalOrFirstMakers = TestUtils.extractList(response,"artObjects.principalOrFirstMaker");
         assertNotNull("The list of principal makers should not be null", principalOrFirstMakers);
         assertTrue("Filter result does not contain the involvedMaker", principalOrFirstMakers.contains(involvedMaker));
+    }
+
+    @When("user makes a request with an object number for the object details")
+    public void userMakesARequestWithAnObjectNumberForTheObjectDetails() {
+        objectNumber = TestUtils.getValidOrDefault(objectNumber, "SK-C-5");
+        RequestHelper.getObjectDetails(api_key, objectNumber);
+    }
+
+    @Then("the response should contain the object's details and should match the Json schema")
+    public void validateObjectDetailsResponse() {
+        response.then().statusCode(200);
+        assertEquals(objectNumber, response.jsonPath().getString("artObject.objectNumber"));
+        response.then().assertThat().body(matchesJsonSchemaInClasspath("Object-schema.json"));
     }
 }

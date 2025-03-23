@@ -11,6 +11,7 @@ public class TestContext {
     protected static Response secondPageResponse;
     protected static String searchKeyword;
     protected static String involvedMaker;
+    protected static String objectNumber;
 
     protected static void baseUrlEn() {
         RestAssured.baseURI = ConfigurationReader.get("baseUrlEn");

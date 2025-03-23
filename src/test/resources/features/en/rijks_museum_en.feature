@@ -81,3 +81,9 @@ Feature: Rijks Museum API tests
     Then the response should contain collections regarding the involvedMaker
     And the status code should be 200
 
+    #Collection Details API
+  Scenario: Retrieving details of a specific object
+    When user makes a request with an object number for the object details
+    Then the response should contain the object's details and should match the Json schema
+    And the status code should be 200
+
