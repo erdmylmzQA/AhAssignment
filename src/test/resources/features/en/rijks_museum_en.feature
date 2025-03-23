@@ -1,4 +1,4 @@
-@test
+
 Feature: Rijks Museum API tests
 
   Background:
@@ -11,6 +11,7 @@ Feature: Rijks Museum API tests
     And the error message should be "Invalid key"
 
     #Collections  API
+  @test
   Scenario: Retrieving the existing collections with page size
     When user sends a get request with a page size
     Then the response should contain a list of collections with the page size
@@ -66,4 +67,17 @@ Feature: Rijks Museum API tests
       | achronologic |
       | artist       |
       | artistdesc   |
+
+    #Collection API
+  Scenario: Search for an existing item
+    When user makes a search with a keyword
+    Then the response should contain search results related to the keyword
+    And the status code should be 200
+
+    #Collection API
+    #Please see the bug report
+  Scenario: Filter collections by principalOrFirstMakers
+    When user makes a request to the collection endpoint with filter by the involvedMaker
+    Then the response should contain collections regarding the involvedMaker
+    And the status code should be 200
 

@@ -29,4 +29,26 @@ public class RequestHelper extends TestContext {
 
     }
 
+    public static void getCollectionWithKeyword(String apiKey, String keyword, int page, int pageSize) {
+        response = given()
+                .queryParam("key", apiKey)
+                .queryParam("q", keyword.replaceAll("[\\p{Punct}]", " "))
+                .queryParam("p", page)
+                .queryParam("ps", pageSize)
+                .when()
+                .get(COLLECTION_ENDPOINT);
+
+    }
+
+    public static void getCollectionInvolvedMaker(String apiKey, String involvedMaker, int page, int pageSize) {
+        response = given()
+                .queryParam("key", apiKey)
+                .queryParam("involvedMaker", TestUtils.extractFullName(involvedMaker))
+                .queryParam("p", page)
+                .queryParam("ps", pageSize)
+                .when()
+                .get(COLLECTION_ENDPOINT);
+
+    }
+
 }
