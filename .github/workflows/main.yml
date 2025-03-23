@@ -17,6 +17,9 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      - name: Create .env File
+        run: |
+          echo "API_KEY=${{ secrets.API_KEY }}" > .env
 
       - name: Set up JDK 17
         uses: actions/setup-java@v3
@@ -37,3 +40,6 @@ jobs:
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
             ${{ runner.os }}-maven
+
+      - name: Run Cucumber Tests and Generate Reports
+        run: mvn test
