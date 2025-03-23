@@ -53,3 +53,17 @@ Feature: Rijks Museum API tests
     Then the results of the pages should be different
     And the status code should be 200
 
+    #Collection API
+  Scenario Outline: Sort collections
+    When user sends a get request with sorting "<parameters>"
+    Then the response should be sorted
+    And the status code should be 200
+    Examples: sort with parameter
+      | parameters   |
+      | relevance    |
+      | objecttype   |
+      | chronologic  |
+      | achronologic |
+      | artist       |
+      | artistdesc   |
+

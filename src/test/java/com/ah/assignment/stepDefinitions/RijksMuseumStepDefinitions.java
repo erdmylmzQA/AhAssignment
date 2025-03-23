@@ -6,6 +6,9 @@ import com.ah.assignment.utils.TestUtils;
 import io.cucumber.java.en.*;
 
 
+import java.util.HashSet;
+import java.util.List;
+
 import static io.restassured.RestAssured.given;
 import static org.junit.Assert.*;
 
@@ -78,5 +81,17 @@ public class RijksMuseumStepDefinitions extends TestContext {
     @Then("the results of the pages should be different")
     public void theResultsOfPageAndPageShouldBeDifferent() {
         assertNotEquals(TestUtils.extractList(response,"artObjects"), TestUtils.extractList(secondPageResponse,"artObjects"));
+    }
+
+    @When("user sends a get request with sorting {string}")
+    public void userSendsAGetRequestWithSorting(String parameters) {
+        RequestHelper.getCollectionWithParameters(api_key, 1, 10, parameters);
+    }
+
+    @Then("the response should be sorted")
+    public void theResponseShouldBeSorted() {
+        List<String> firstObjects = TestUtils.extractList(response, "artObjects.objectNumber");
+        HashSet<String> uniqueFirstObjects = new HashSet<>(firstObjects);
+        assertEquals(uniqueFirstObjects.size(), firstObjects.size());
     }
 }
