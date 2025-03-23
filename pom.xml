@@ -22,7 +22,6 @@
         <lombok.version>1.18.30</lombok.version>
         <maven.compiler.plugin.version>3.11.0</maven.compiler.plugin.version>
         <maven.surefire.plugin.version>3.1.2</maven.surefire.plugin.version>
-        <cucumber.reporting.version>5.7.6</cucumber.reporting.version>
         <java-dotenv.version>5.2.2</java-dotenv.version>
         <slf4j.version>2.0.9</slf4j.version>
     </properties>
@@ -111,25 +110,6 @@
                     <useSystemClassLoader>true</useSystemClassLoader>
                     <reportsDirectory>${project.build.directory}/surefire-reports</reportsDirectory>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>net.masterthought</groupId>
-                <artifactId>maven-cucumber-reporting</artifactId>
-                <version>${cucumber-reporting.version}</version>
-                <executions>
-                    <execution>
-                        <id>execution</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                        <configuration>
-                            <projectName>AHAssignment</projectName>
-                            <outputDirectory>${project.build.directory}/cucumber-html-reports</outputDirectory>
-                            <jsonFiles>${project.build.directory}/json-reports/cucumber.json</jsonFiles>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>
