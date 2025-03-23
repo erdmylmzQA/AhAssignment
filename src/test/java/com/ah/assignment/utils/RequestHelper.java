@@ -87,4 +87,12 @@ public class RequestHelper extends TestContext {
                 .get(USERSETS_ENDPOINT);
     }
 
+    public static void getUserSetsDetails(String apiKey, String userSetId) {
+        response = given()
+                .queryParam("key", apiKey)
+                .queryParam("format", "json")
+                .when()
+                .get(USERSETS_ENDPOINT + "/{set-id}", userSetId);
+    }
+
 }
