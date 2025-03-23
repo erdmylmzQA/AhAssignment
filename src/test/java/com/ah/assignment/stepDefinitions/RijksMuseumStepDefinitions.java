@@ -136,4 +136,43 @@ public class RijksMuseumStepDefinitions extends TestContext {
         assertEquals(objectNumber, response.jsonPath().getString("artObject.objectNumber"));
         response.then().assertThat().body(matchesJsonSchemaInClasspath("Object-schema.json"));
     }
+
+    @When("user sends a get request with filtering parameters in English")
+    public void userSendsAGetRequestWithFilteringParametersInEn() {
+        RequestHelper.getFilteredCollection(api_key,
+                "Amsterdam",
+                "painting",
+                "paint",
+                17,
+                true,
+                "oil paint (paint)");
+
+        objectNumber = TestUtils.extractString(response,"artObjects[0].objectNumber");
+    }
+
+    @Then("the response should contain the filtering parameters in the object details")
+    public void theResponseShouldContainTheFilteringParametersInTheObjectDetails() {
+        assertNotNull(response.jsonPath().getString("artObject.objectTypes"));
+        assertNotNull(response.jsonPath().getString("artObject.materials"));
+        assertNotNull(response.jsonPath().getString("artObject.techniques"));
+        assertNotNull(response.jsonPath().getString("artObject.productionPlaces"));
+        assertNotNull(response.jsonPath().getString("artObject.dating.period"));
+        assertNotNull(response.jsonPath().getString("artObject.hasImage"));
+    }
+
+    @When("user makes a request to the object details endpoint with {string}")
+    public void userMakesARequestToTheObjectDetailsEndpointWith(String invalidObjectNumber) {
+        RequestHelper.getObjectDetails(api_key, invalidObjectNumber);
+    }
+
+    @Then("the response should not contain any object")
+    public void theResponseShouldNotContainAnyObject() {
+        assertNull(response.jsonPath().getString("artObject"));
+        assertNull(response.jsonPath().getString("artObjectPage"));
+    }
+
+    @And("the error message is not {string}")
+    public void theErrorMessageIsNot(String errorMessage) {
+        assertNotEquals(errorMessage, response.asString());
+    }
 }

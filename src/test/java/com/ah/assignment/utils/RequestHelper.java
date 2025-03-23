@@ -55,4 +55,19 @@ public class RequestHelper extends TestContext {
                 .get(COLLECTION_ENDPOINT + "/{objectNumber}", objectNumber);
     }
 
+    public static void getFilteredCollection(String apiKey, String place, String type, String technique, int period, boolean imgOnly, String material) {
+        response = given()
+                .queryParam("key", apiKey)
+                .queryParam("place", place)
+                .queryParam("type", type)
+                .queryParam("technique", technique)
+                .queryParam("f.dating.period", period)
+                .queryParam("imgonly", imgOnly)
+                .queryParam("material", material)
+                .queryParam("p", 1)
+                .queryParam("ps", 50)
+                .when()
+                .get(COLLECTION_ENDPOINT);
+    }
+
 }
