@@ -11,6 +11,9 @@ import java.util.List;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.greaterThan;
 import static org.junit.Assert.*;
 
 public class RijksMuseumStepDefinitions extends TestContext {
@@ -174,5 +177,20 @@ public class RijksMuseumStepDefinitions extends TestContext {
     @And("the error message is not {string}")
     public void theErrorMessageIsNot(String errorMessage) {
         assertNotEquals(errorMessage, response.asString());
+    }
+
+    @When("user makes a request with an object number to get the necessary information for showing the image")
+    public void userMakesARequestWithAnObjectNumberToGetTheNecessaryInformationForShowingTheImage() {
+        objectNumber = TestUtils.getValidOrDefault(objectNumber, "SK-C-5");
+        RequestHelper.getCollectionImage(api_key, objectNumber);
+    }
+
+    @Then("user makes a field validation")
+    public void userMakesAFieldValidation() {
+        assertThat(TestUtils.extractList(response, "levels[0].tiles"), hasSize(greaterThan(0)));
+        assertThat(TestUtils.extractString(response, "levels[0].tiles[0].url"), matchesPattern("^http://.*"));
+        assertThat(TestUtils.extractString(response, "levels[0].name"), not(emptyOrNullString()));
+        assertThat(TestUtils.extractInt(response, "levels[0].width"), greaterThan(0));
+        assertThat(TestUtils.extractInt(response, "levels[0].height"), greaterThan(0));
     }
 }

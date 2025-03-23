@@ -99,3 +99,9 @@ Feature: Rijks Museum API tests
     When user makes a request to the object details endpoint with "!$(!)}"
     Then the response should not contain any object
     And the error message is not "Invalid Object Number"
+
+    #Collection Image API
+  Scenario: Show the image split up in tiles
+    When user makes a request with an object number to get the necessary information for showing the image
+    Then user makes a field validation
+    And the status code should be 200

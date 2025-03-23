@@ -41,4 +41,8 @@ public class TestUtils {
     public static String extractString(Response response, String path) {
         return response.jsonPath().getString(path);
     }
+
+    public static int extractInt(Response response, String path) {
+        return response.jsonPath().getInt(path);
+    }
 }

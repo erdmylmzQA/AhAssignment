@@ -70,4 +70,11 @@ public class RequestHelper extends TestContext {
                 .get(COLLECTION_ENDPOINT);
     }
 
+    public static void getCollectionImage(String apiKey, String objectNumber) {
+        response = given()
+                .queryParam("key", apiKey)
+                .when()
+                .get(COLLECTION_ENDPOINT + "/{objectNumber}/tiles", objectNumber);
+    }
+
 }
