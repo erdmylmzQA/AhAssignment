@@ -1,5 +1,5 @@
 @test
-Feature: Retrieve the collections
+Feature: Rijks Museum API tests for nl endpoint
 
   Background:
     Given user wants to retrieve collection or object from the Rijksmuseum API in Nederlands
