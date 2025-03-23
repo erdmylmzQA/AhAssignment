@@ -1,4 +1,4 @@
-@test1
+@test
 Feature: Retrieve the collections
 
   Background:
