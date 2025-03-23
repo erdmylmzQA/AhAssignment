@@ -11,6 +11,6 @@ target/
 *.iws
 *.iml
 *.ipr
-
+.env
 ### Mac OS ###
 .DS_Store
