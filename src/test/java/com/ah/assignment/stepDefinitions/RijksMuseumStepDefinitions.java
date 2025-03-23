@@ -193,4 +193,15 @@ public class RijksMuseumStepDefinitions extends TestContext {
         assertThat(TestUtils.extractInt(response, "levels[0].width"), greaterThan(0));
         assertThat(TestUtils.extractInt(response, "levels[0].height"), greaterThan(0));
     }
+
+    @When("user sends a get request for Usersets")
+    public void userSendsAGetRequestForUsersets() {
+        RequestHelper.getUserSets(api_key, 2);
+        userSetId = TestUtils.extractString(response, "userSets[1].id");
+    }
+
+    @Then("user validates the response")
+    public void userValidatesTheResponse() {
+        assertThat(TestUtils.extractList(response, "userSets"), hasSize(greaterThan(0)));
+    }
 }

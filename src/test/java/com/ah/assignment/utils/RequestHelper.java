@@ -8,6 +8,7 @@ import static io.restassured.RestAssured.given;
 
 public class RequestHelper extends TestContext {
     private static final String COLLECTION_ENDPOINT = ConfigurationReader.get("collection");
+    private static final String USERSETS_ENDPOINT = ConfigurationReader.get("userSets");
 
     public static void getCollection(String apiKey, int page, int pageSize) {
         response = given()
@@ -75,6 +76,15 @@ public class RequestHelper extends TestContext {
                 .queryParam("key", apiKey)
                 .when()
                 .get(COLLECTION_ENDPOINT + "/{objectNumber}/tiles", objectNumber);
+    }
+
+    public static void getUserSets(String apiKey, int page) {
+        response = given()
+                .queryParam("key", apiKey)
+                .queryParam("format", "json")
+                .queryParam("p", page)
+                .when()
+                .get(USERSETS_ENDPOINT);
     }
 
 }

@@ -105,3 +105,9 @@ Feature: Rijks Museum API tests
     When user makes a request with an object number to get the necessary information for showing the image
     Then user makes a field validation
     And the status code should be 200
+
+    #Usersets API
+  Scenario: List the sets made by Rijksstudio users
+    When user sends a get request for Usersets
+    Then user validates the response
+    And the status code should be 200
