@@ -204,4 +204,15 @@ public class RijksMuseumStepDefinitions extends TestContext {
     public void userValidatesTheResponse() {
         assertThat(TestUtils.extractList(response, "userSets"), hasSize(greaterThan(0)));
     }
+
+    @When("user sends a get request for Usersets details")
+    public void userSendsAGetRequestForUsersetsDetails() {
+        userSetId = TestUtils.getValidOrDefault(userSetId, "2525118-mijn-producten");
+        RequestHelper.getUserSetsDetails(api_key, userSetId);
+    }
+
+    @Then("user validates the userSetId")
+    public void userValidatesTheUserSetId() {
+        assertEquals(userSetId, TestUtils.extractString(response, "userSet.id"));
+    }
 }

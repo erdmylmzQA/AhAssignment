@@ -111,3 +111,9 @@ Feature: Rijks Museum API tests
     When user sends a get request for Usersets
     Then user validates the response
     And the status code should be 200
+
+    #Userset Details API
+  Scenario: Show the details about a specific set
+    When user sends a get request for Usersets details
+    Then user validates the userSetId
+    And the status code should be 200
