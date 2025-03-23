@@ -12,6 +12,7 @@ public class TestContext {
     protected static String searchKeyword;
     protected static String involvedMaker;
     protected static String objectNumber;
+    protected static String userSetId;
 
     protected static void baseUrlEn() {
         RestAssured.baseURI = ConfigurationReader.get("baseUrlEn");
