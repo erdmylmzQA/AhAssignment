@@ -17,6 +17,9 @@ public class TestContext {
     protected static void baseUrlEn() {
         RestAssured.baseURI = ConfigurationReader.get("baseUrlEn");
     }
+    protected static void baseUrlNl() {
+        RestAssured.baseURI = ConfigurationReader.get("baseUrlNl");
+    }
 
     protected String api_key = DotEnvToSystemEnv.getEnvValue("API_KEY");
 }

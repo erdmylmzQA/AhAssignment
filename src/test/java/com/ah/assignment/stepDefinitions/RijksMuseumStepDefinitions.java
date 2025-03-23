@@ -17,9 +17,14 @@ import static org.hamcrest.Matchers.greaterThan;
 import static org.junit.Assert.*;
 
 public class RijksMuseumStepDefinitions extends TestContext {
+
     @Given("user wants to retrieve collection or object from the Rijksmuseum API in English")
     public void userWantsToRetrieveCollectionOrObjectFromTheRijksmuseumAPIInEn() {
         baseUrlEn();
+    }
+    @Given("user wants to retrieve collection or object from the Rijksmuseum API in Nederlands")
+    public void userWantsToRetrieveCollectionOrObjectFromTheRijksmuseumAPIInNl() {
+        baseUrlNl();
     }
 
     @When("user sends a get request with an invalid API key")
@@ -218,5 +223,17 @@ public class RijksMuseumStepDefinitions extends TestContext {
     @Then("user validates the userSetId")
     public void userValidatesTheUserSetId() {
         assertEquals(userSetId, TestUtils.extractString(response, "userSet.id"));
+    }
+    @When("user sends a get request with filtering parameters in Nederlands")
+    public void userSendsAGetRequestWithFilteringParametersInNl() {
+        RequestHelper.getFilteredCollection(api_key,
+                "Amsterdam",
+                "schilderij",
+                "schilderen",
+                17,
+                true,
+                "olieverf");
+
+        objectNumber = TestUtils.extractString(response,"artObjects[0].objectNumber");
     }
 }
