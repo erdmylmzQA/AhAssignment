@@ -39,7 +39,7 @@ This project uses the following technologies:
 ## Setup Instructions
 1. Clone the repository.
 ```
-git clone https://github.com/
+https://github.com/erdmylmzQA/AhAssignment.git
 ```
 2. Rename the `.env.place_holder` to `.env` and open it.
 3. In the `.env` file, replace the placeholder value for `API_KEY` with the real value in the assignment.
