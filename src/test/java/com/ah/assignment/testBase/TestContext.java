@@ -8,6 +8,7 @@ import io.restassured.response.Response;
 public class TestContext {
     protected static Response response;
     protected static int pageSize;
+    protected static Response secondPageResponse;
 
     protected static void baseUrlEn() {
         RestAssured.baseURI = ConfigurationReader.get("baseUrlEn");

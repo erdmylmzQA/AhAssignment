@@ -34,3 +34,22 @@ Feature: Rijks Museum API tests
       | 100     | 105      |
       | 99      | 100      |
       | 99      | 105      |
+
+    #Collection API
+  Scenario Outline: Request with very large page number
+    When user makes a request for collections by <pNumber> and <psNumber>
+    Then the response should return an empty result
+    And the status code should be 200
+    Examples: page and ps numbers
+      | pNumber | psNumber |
+      | 101     | 100      |
+      | 101     | 110      |
+      | 101     | 95       |
+
+    #Collection API
+  Scenario: Retrieving multiple pages of collections
+    When user makes a request for page 1 of collections
+    And user makes a request for page 2 of collections
+    Then the results of the pages should be different
+    And the status code should be 200
+
