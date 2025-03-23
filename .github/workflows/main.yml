@@ -43,3 +43,21 @@ jobs:
 
       - name: Run Cucumber Tests and Generate Reports
         run: mvn test
+
+      - name: Upload Cucumber HTML Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: cucumber-html-report
+          path: target/cucumber-html-reports/cucumber-reports.html
+
+      - name: Upload Spark Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: spark-report
+          path: target/spark_report/spark.html
+
+      - name: Upload Extent PDF Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: extent-pdf-report
+          path: target/pdf_report/extentPdf.pdf
