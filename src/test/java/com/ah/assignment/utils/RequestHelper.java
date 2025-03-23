@@ -26,7 +26,6 @@ public class RequestHelper extends TestContext {
                 .queryParam("s", parameters)
                 .when()
                 .get(COLLECTION_ENDPOINT);
-
     }
 
     public static void getCollectionWithKeyword(String apiKey, String keyword, int page, int pageSize) {
@@ -37,7 +36,6 @@ public class RequestHelper extends TestContext {
                 .queryParam("ps", pageSize)
                 .when()
                 .get(COLLECTION_ENDPOINT);
-
     }
 
     public static void getCollectionInvolvedMaker(String apiKey, String involvedMaker, int page, int pageSize) {
@@ -48,7 +46,13 @@ public class RequestHelper extends TestContext {
                 .queryParam("ps", pageSize)
                 .when()
                 .get(COLLECTION_ENDPOINT);
+    }
 
+    public static void getObjectDetails(String apiKey, String objectNumber) {
+        response = given()
+                .queryParam("key", apiKey)
+                .when()
+                .get(COLLECTION_ENDPOINT + "/{objectNumber}", objectNumber);
     }
 
 }
