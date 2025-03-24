@@ -57,7 +57,7 @@ git clone https://github.com/
 
 * Run all tests:
     * `mvn test`
-* Run all tests via runner:
+
     * `mvn test -Dtest=com.ah.assignment.runners.TestRunner`
 * Run Failed tests :
     * `mvn test -Dtest=com.ah.assignment.runners.FailedTestCaseRunner`
