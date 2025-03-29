@@ -39,7 +39,7 @@ This project uses the following technologies:
 ## Setup Instructions
 1. Clone the repository.
 ```
-git clone https://github.com/
+https://github.com/erdmylmzQA/AhAssignment.git
 ```
 2. Rename the `.env.place_holder` to `.env` and open it.
 3. In the `.env` file, replace the placeholder value for `API_KEY` with the real value in the assignment.
@@ -57,10 +57,10 @@ git clone https://github.com/
 
 * Run all tests:
     * `mvn test`
-* Run all tests via runner:
-    * `mvn test -Dtest=org.ahassignment.runners.TestRunner`
+
+    * `mvn test -Dtest=com.ah.assignment.runners.TestRunner`
 * Run Failed tests :
-    * `mvn test -Dtest=org.ahassignment.runners.FailedTestCaseRunner`
+    * `mvn test -Dtest=com.ah.assignment.runners.FailedTestCaseRunner`
       _Failed tests are logged in target/rerun/failed-tests.txt and can be re-run using this command._
 
 ### To Run the tests via IDE _(recommended IDE: intellij)_
